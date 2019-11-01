@@ -14,7 +14,7 @@ class Canvas extends Component {
     isPainting = false 
     userStrokeStyle = '#EE92C2';
     guestStrokeStyle = '#F0C987';
-    line = [] //This is where the paint data will be stored
+    line = [] //This is where the paint data will be stored;
  
     prevPos = { offsetX: 0, offsetY: 0 }; 
 
