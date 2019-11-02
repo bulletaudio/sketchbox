@@ -9,10 +9,13 @@ import SideNav from './sideNav';
 
 class App extends Component {
 
-
   state = {
     indexOfCurrentDrawing: 0,
     drawings: []
+  }
+
+  constructor(props) {
+    super(props);
   }
 
   //Declared outside of state 
@@ -23,6 +26,7 @@ class App extends Component {
 
     //Add new drawing 
     this.createNewDrawing()
+
   }
 
   render() {
@@ -37,6 +41,7 @@ class App extends Component {
   createNewDrawing = () => {
     const drawingsLength = this.state.drawings.length;
     const name = `Drawing ${drawingsLength + 1}`;
+    console.log(name);
 
     const drawing = {
       id: drawingsLength,
@@ -46,12 +51,12 @@ class App extends Component {
     this.addDrawingToList(drawing)
 
     const drawings = this.state.drawings
-    this.setState({
-      indexOfCurrentDrawing: drawingsLength 
-    })
+    // this.setState({
+    //   indexOfCurrentDrawing: drawingsLength 
+    // })
   }
 
-  addDrawingToList = (drawing) => {
+  addDrawingToList(drawing) {
     var newDrawings = this.state.drawings;
     newDrawings.push(drawing);
     this.setState({
@@ -60,17 +65,18 @@ class App extends Component {
   }
 
 
-  getCurrentDrawing = () => {
+  getCurrentDrawing() {
     const index = this.state.indexOfCurrentDrawing;
     const drawings = this.state.drawings;
     return drawings[index];
   }
 
-  updateLineOfCurrentDrawing = (positionData) => {
+  updateLineOfCurrentDrawing(positionData) {
     this.lineOfCurrentDrawing = this.lineOfCurrentDrawing.concat(positionData);
   }
 
-  updateCurrentDrawingInDrawingsList = () => {
+
+  updateCurrentDrawingInDrawingsList() {
     const drawings = this.state.drawings 
     const index = this.state.indexOfCurrentDrawing;
     drawings[index].line = this.lineOfCurrentDrawing;
@@ -81,7 +87,9 @@ class App extends Component {
     
   }
 
-  selectDrawing = (id) => {
+  selectDrawing(id) {
+    const line = this.state.drawings[id].line
+    this.lineOfCurrentDrawing = line 
     this.setState({
       indexOfCurrentDrawing: id
     })

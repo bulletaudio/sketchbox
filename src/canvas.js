@@ -14,13 +14,14 @@ class Canvas extends Component {
     isPainting = false 
     userStrokeStyle = '#EE92C2';
     guestStrokeStyle = '#F0C987';
-    // line = [] //This is where the paint data will be stored;
+    canvasWidth = 1000;
+    canvasHeight = 800;
  
     prevPos = { offsetX: 0, offsetY: 0 }; 
 
     componentDidMount() {  
-        this.canvas.width = 1000;
-        this.canvas.height = 800;
+        this.canvas.width = this.canvasWidth;
+        this.canvas.height = this.canvasHeight;
         this.ctx = this.canvas.getContext('2d');
         this.ctx.lineJoin = 'round';
         this.ctx.lineCap = 'round';
@@ -65,16 +66,49 @@ class Canvas extends Component {
             // this.line = this.line.concat(positionData);
             this.props.app.updateLineOfCurrentDrawing(positionData) 
             this.paint(this.prevPos, offSetData, this.userStrokeStyle);
-
+            
         }
     }
 
     endPaintEvent() {
         if (this.isPainting) {
             this.isPainting = false;
-            this.props.app.updateCurrentDrawingInDrawingsList;
+            this.props.app.updateCurrentDrawingInDrawingsList();
         }
     }
+
+    clearCanvas = () => {
+        this.ctx.clearRect(0,0, this.canvasWidth, this.canvasHeight)
+    }
+
+    redrawCanvas = () => {
+        const line = this.props.app.lineOfCurrentDrawing;
+        console.log(`COUNT: ${line.length}`)
+
+        const startingPosition = { offsetX: 0, offsetY: 0 };
+
+        for (var i=0; i < line.length; i++) {
+
+            // const position = line[i]
+            // console.log(position)
+            // if (i === 0) {
+            //     //First position
+            //     const current = line[i];
+            //     this.paint(startingPosition, current, this.userStrokeStyle);
+            // } else {
+            //     //In between
+            //     const currentPosition = line[i - 1];
+            //     const lastPosition = line[i]
+            //     this.paint(lastPosition, currentPosition, this.userStrokeStyle);
+    
+            // }
+            const position = line[i];
+            this.paint(position.start, position.stop, this.userStrokeStyle);
+
+        }
+
+    }
+
 
     render() {
         return (
@@ -87,8 +121,12 @@ class Canvas extends Component {
             onMouseUp={this.endPaintEvent}
             onMouseMove={this.onMouseMove}
           />
-        //   <button onClick={this.props.foo(param)}></button>
         );
+      }
+
+      componentDidUpdate() {
+          this.clearCanvas();
+          this.redrawCanvas();
       }
     
 }
