@@ -63,8 +63,7 @@ class Canvas extends Component {
 
             // Add position to the line array 
             // this.line = this.line.concat(positionData);
-            this.props.app.updateLineOfCurrentDrawing(positionData)
-
+            this.props.app.updateLineOfCurrentDrawing(positionData) 
             this.paint(this.prevPos, offSetData, this.userStrokeStyle);
 
         }
@@ -73,6 +72,7 @@ class Canvas extends Component {
     endPaintEvent() {
         if (this.isPainting) {
             this.isPainting = false;
+            this.props.app.updateCurrentDrawingInDrawingsList;
         }
     }
 

@@ -11,22 +11,19 @@ class App extends Component {
 
 
   state = {
+    indexOfCurrentDrawing: 0,
     drawings: []
   }
 
-  currentDrawing;
-
-  //** Drawing schema 
-  //{
-  //   id:0,
-  //   name: "Drawing 1",
-  //   line: []
-  // }
+  //Declared outside of state 
+  //so as to avoid triggering render everytime it changes 
+  lineOfCurrentDrawing = []
 
   componentDidMount() {
+
+    //Add new drawing 
     this.createNewDrawing()
   }
-
 
   render() {
     return (
@@ -49,8 +46,9 @@ class App extends Component {
     this.addDrawingToList(drawing)
 
     const drawings = this.state.drawings
-
-    this.currentDrawing = drawing 
+    this.setState({
+      indexOfCurrentDrawing: drawingsLength 
+    })
   }
 
   addDrawingToList = (drawing) => {
@@ -63,13 +61,30 @@ class App extends Component {
 
 
   getCurrentDrawing = () => {
-    return this.state.drawings.find((drawing) => {
-        return (drawing.id === this.currentDrawing.id)[0];
-    })
+    const index = this.state.indexOfCurrentDrawing;
+    const drawings = this.state.drawings;
+    return drawings[index];
   }
 
   updateLineOfCurrentDrawing = (positionData) => {
-    this.currentDrawing.line = this.currentDrawing.line.concat(positionData);
+    this.lineOfCurrentDrawing = this.lineOfCurrentDrawing.concat(positionData);
+  }
+
+  updateCurrentDrawingInDrawingsList = () => {
+    const drawings = this.state.drawings 
+    const index = this.state.indexOfCurrentDrawing;
+    drawings[index].line = this.lineOfCurrentDrawing;
+
+    this.setState({
+      drawings: drawings
+    })
+    
+  }
+
+  selectDrawing = (id) => {
+    this.setState({
+      indexOfCurrentDrawing: id
+    })
   }
 
 

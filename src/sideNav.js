@@ -6,6 +6,7 @@ import './CSS/sideNav.css';
 class SideNav extends Component {
     render() {
       const drawings = this.props.app.state.drawings;
+      const indexOfCurrentDrawing = this.props.app.state.indexOfCurrentDrawing;
 
         return (
             <Router>
@@ -20,7 +21,12 @@ class SideNav extends Component {
                 <ul style={{listStyleType: 'none', padding:'10px'}}>
                     {
                       drawings.map((drawing) => {
-                      return <li><h3 className="Drawing-Name">{drawing.name}</h3></li>
+                        if (drawing.id === indexOfCurrentDrawing) {
+                          return <li  className="Current-Drawing"><h3 className="Drawing-Name">{drawing.name}</h3></li>
+                        }
+                      return <li><h3 onClick={(e) => {
+                        this.props.app.selectDrawing(drawing.id)
+                      }} className="Drawing-Name">{drawing.name}</h3></li>
                     })}
                 </ul>
               </div>
