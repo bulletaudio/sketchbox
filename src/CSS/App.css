@@ -32,7 +32,7 @@
 .rowC {
   display:flex;
   flex-direction:row;
-  justify-content: left;
+  background-color: black;
 }
 
 @keyframes App-logo-spin {

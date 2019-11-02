@@ -1,0 +1,20 @@
+.Create-New-Button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 30px;
+    height: 35px;
+    width: 200px;
+}
+
+.Side-Nav {
+    display:flex; 
+    height: 100vh;
+    width: 24%;
+    background: '#222222';
+}
+
+.Drawing-Name {
+    text-align: center;
+    color: white;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './CSS/canvas.css';
 
 class Canvas extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Canvas extends Component {
     isPainting = false 
     userStrokeStyle = '#EE92C2';
     guestStrokeStyle = '#F0C987';
-    line = [] //This is where the paint data will be stored;
+    // line = [] //This is where the paint data will be stored;
  
     prevPos = { offsetX: 0, offsetY: 0 }; 
 
@@ -40,7 +40,6 @@ class Canvas extends Component {
         this.ctx.stroke();
         this.prevPos = { offsetX, offsetY }
 
-
     }
 
     // User clicks -> Indicate is painting & store positions + offsets
@@ -63,8 +62,9 @@ class Canvas extends Component {
             };
 
             // Add position to the line array 
-            this.line = this.line.concat(positionData);
-            
+            // this.line = this.line.concat(positionData);
+            this.props.app.updateLineOfCurrentDrawing(positionData)
+
             this.paint(this.prevPos, offSetData, this.userStrokeStyle);
 
         }
@@ -87,6 +87,7 @@ class Canvas extends Component {
             onMouseUp={this.endPaintEvent}
             onMouseMove={this.onMouseMove}
           />
+        //   <button onClick={this.props.foo(param)}></button>
         );
       }
     
