@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
 
     //Add new drawing 
-    this.createNewDrawing()
+    this.createNewDrawing("First drawing")
 
   }
 
@@ -38,9 +38,12 @@ class App extends Component {
     );
   }
 
-  createNewDrawing = () => {
+  createNewDrawing = (nameInput) => {
     const drawingsLength = this.state.drawings.length;
-    const name = `Drawing ${drawingsLength + 1}`;
+    var name = nameInput
+    if (nameInput === null) {
+      name = `Drawing ${drawingsLength + 1}`;
+    }
     console.log(name);
 
     const drawing = {

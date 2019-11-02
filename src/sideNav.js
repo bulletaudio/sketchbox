@@ -4,6 +4,11 @@ import './CSS/sideNav.css';
 
 
 class SideNav extends Component {
+
+    state = {
+      newDrawingName: null
+    }
+
     render() {
       const drawings = this.props.app.state.drawings;
       const indexOfCurrentDrawing = this.props.app.state.indexOfCurrentDrawing;
@@ -15,7 +20,10 @@ class SideNav extends Component {
                 width: '100%',
                 background: '#222222'
               }}>
-                <button onClick={this.props.app.createNewDrawing} className="Create-New-Button" style={{
+                <input className="Input" type="text" placeholder="Add name here"/>
+                <button onClick={(e) => {
+                  this.props.app.createNewDrawing(this.state.newDrawingName)
+                }} className="Create-New-Button" style={{
                   }}>Create new drawing</button>
 
                 <ul style={{listStyleType: 'none', padding:'10px'}}>
@@ -34,6 +42,13 @@ class SideNav extends Component {
        
           </Router>
         )
+    }
+
+    handleChange = (text) => {
+      this.setState({
+        newDrawingName: text
+      })
+
     }
 }
 
