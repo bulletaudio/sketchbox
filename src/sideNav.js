@@ -6,7 +6,7 @@ import './CSS/sideNav.css';
 class SideNav extends Component {
 
     state = {
-      newDrawingName: null
+      inputValue: ""
     }
 
     render() {
@@ -15,40 +15,38 @@ class SideNav extends Component {
 
         return (
             <Router>
-            <div className="Side-Nav">
-              <div style={{
-                width: '100%',
-                background: '#222222'
-              }}>
-                <input className="Input" type="text" placeholder="Add name here"/>
-                <button onClick={(e) => {
-                  this.props.app.createNewDrawing(this.state.newDrawingName)
-                }} className="Create-New-Button" style={{
-                  }}>Create new drawing</button>
+              <div className="Side-Nav">
+                <input className="Input" type="text" placeholder="Add name here" value={this.state.inputValue} onChange={this.handleChange}/>
+                <button onClick={(e) => {this.didTapNewDrawingButton() }} className="Create-New-Button"> Create new drawing </button>
 
-                <ul style={{listStyleType: 'none', padding:'10px'}}>
+                <ul className="Drawings-List">
                     {
                       drawings.map((drawing) => {
                         if (drawing.id === indexOfCurrentDrawing) {
-                          return <li  className="Current-Drawing"><h3 className="Drawing-Name">{drawing.name}</h3></li>
+                          return <li  className="Current-Drawing"><h3 className="Drawing-Text">{drawing.name}</h3></li>
                         }
                       return <li><h3 onClick={(e) => {
                         this.props.app.selectDrawing(drawing.id)
-                      }} className="Drawing-Name">{drawing.name}</h3></li>
+                      }} className="Drawing-Text">{drawing.name}</h3></li>
                     })}
                 </ul>
               </div>
-            </div>
-       
           </Router>
         )
     }
 
-    handleChange = (text) => {
+    handleChange = (evt) => {
       this.setState({
-        newDrawingName: text
+        inputValue: evt.target.value
       })
+    }
 
+    didTapNewDrawingButton = () => {
+      this.props.app.createNewDrawing(this.state.inputValue)
+      
+      this.setState({
+        inputValue: ""
+      })
     }
 }
 

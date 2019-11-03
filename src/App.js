@@ -18,8 +18,6 @@ class App extends Component {
     super(props);
   }
 
-  //Declared outside of state 
-  //so as to avoid triggering render everytime it changes 
   lineOfCurrentDrawing = []
 
   componentDidMount() {
@@ -41,10 +39,10 @@ class App extends Component {
   createNewDrawing = (nameInput) => {
     const drawingsLength = this.state.drawings.length;
     var name = nameInput
-    if (nameInput === null) {
+
+    if (nameInput === null | nameInput === "") {
       name = `Drawing ${drawingsLength + 1}`;
     }
-    console.log(name);
 
     const drawing = {
       id: drawingsLength,
@@ -54,9 +52,6 @@ class App extends Component {
     this.addDrawingToList(drawing)
 
     const drawings = this.state.drawings
-    // this.setState({
-    //   indexOfCurrentDrawing: drawingsLength 
-    // })
   }
 
   addDrawingToList(drawing) {

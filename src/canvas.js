@@ -12,8 +12,7 @@ class Canvas extends Component {
 
     //1. Is user painting? 2. Color of paint. 3. Previous position user clicked before painting 
     isPainting = false 
-    userStrokeStyle = '#EE92C2';
-    guestStrokeStyle = '#F0C987';
+    userStrokeStyle = '#FFFFFF';
     canvasWidth = 1000;
     canvasHeight = 800;
  
@@ -83,32 +82,14 @@ class Canvas extends Component {
 
     redrawCanvas = () => {
         const line = this.props.app.lineOfCurrentDrawing;
-        console.log(`COUNT: ${line.length}`)
-
         const startingPosition = { offsetX: 0, offsetY: 0 };
 
         for (var i=0; i < line.length; i++) {
-
-            // const position = line[i]
-            // console.log(position)
-            // if (i === 0) {
-            //     //First position
-            //     const current = line[i];
-            //     this.paint(startingPosition, current, this.userStrokeStyle);
-            // } else {
-            //     //In between
-            //     const currentPosition = line[i - 1];
-            //     const lastPosition = line[i]
-            //     this.paint(lastPosition, currentPosition, this.userStrokeStyle);
-    
-            // }
             const position = line[i];
             this.paint(position.start, position.stop, this.userStrokeStyle);
 
         }
-
     }
-
 
     render() {
         return (
@@ -129,5 +110,6 @@ class Canvas extends Component {
           this.redrawCanvas();
       }
     
+
 }
 export default Canvas;

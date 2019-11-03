@@ -2,25 +2,25 @@
     display: block;
     margin-left: auto;
     margin-right: auto; 
-    margin-top: 30px;
+    margin-top: 20px;
     height: 35px;
     width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
+    border-radius: 3px;
 }
 
-.Side-Nav {
-    display:flex; 
-    height: 100vh;
-    width: 24%;
-    background: '#222222';
-}
 
-.Drawing-Name {
+.Drawing-Text {
     text-align: center;
     color: white;
 }
 
 .Current-Drawing {
-    background-color: blue;
+    background-color: lightcoral;
+    padding: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
 }
 
 .Input {
@@ -28,4 +28,18 @@
     margin-left: auto;
     margin-right: auto; 
     margin-top: 30px;
+    width: 180px;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.Side-Nav {
+    width: 100%;
+    background-color: #222222;
+}
+
+.Drawings-List {
+    list-style-type: none;
+    padding: 10px;
+    align-content: center;
 }
